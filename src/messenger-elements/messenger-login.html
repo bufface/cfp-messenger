@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
 
@@ -23,7 +24,11 @@
       <paper-input label="Correo electrónico" type="email" required="true" id="email"></paper-input>
       <paper-input label="Contraseña" type="password" required="true" id="password"></paper-input>
 
-      <paper-button raised id="button">Ingresar</paper-button>
+      <paper-checkbox id="checkbox">Crear Nueva Cuenta</paper-checkbox>
+
+      <div>
+        <paper-button raised id="button">Ingresar</paper-button>
+      </div>
     </form>
   </template>
 
@@ -38,10 +43,19 @@
       sendForm: function () {
         var email = this.$.email.value
         var password = this.$.password.value
-        this.$.auth.createUserWithEmailAndPassword(email, password)
+        var checkbox = this.$.checkbox.active
+
+        if (checkbox) {
+          this.$.auth.createUserWithEmailAndPassword(email, password)
               .then(function () {
                 console.log("Usuario Creado")
               })
+        } else {
+          this.$.auth.signInWithEmailAndPassword(email, password)
+              .then(function () {
+                console.log("Usuario Logeado")
+              })
+        }
       }
     })
   </script>
