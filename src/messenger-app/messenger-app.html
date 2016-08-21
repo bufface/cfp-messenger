@@ -26,10 +26,13 @@
         width: 100%;
         max-width: 400px;
       }
+      .oculto {
+        display: none;
+      }
     </style>
     <div id="contenedor" class="layout horizontal">
-      <messenger-login user="{{user}}" on-login="authenticate"></messenger-login>
-      <messenger-home></messenger-home>
+      <messenger-login id="login" user="{{user}}" on-login="authenticate"></messenger-login>
+      <messenger-home id="home" class="oculto"></messenger-home>
     </div>
   </template>
 
@@ -45,7 +48,8 @@
       },
 
       authenticate: function (e) {
-        console.log("Soy app y estoy autenticado")
+        this.$.login.classList.add("oculto")
+        this.$.home.classList.remove("oculto")
       }
     });
   </script>
