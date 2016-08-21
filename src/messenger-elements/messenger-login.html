@@ -39,7 +39,11 @@
       properties: {
         email: String,
         password: String,
-        signUp: Boolean
+        signUp: Boolean,
+        user: {
+          type: Object,
+          notify: true
+        }
       },
 
       ready: function () {
@@ -55,8 +59,8 @@
               })
         } else {
           this.$.auth.signInWithEmailAndPassword(this.email, this.password)
-              .then(function () {
-                console.log("Usuario Logeado")
+              .then((user) => {
+                this.user = user
               })
         }
       },
@@ -68,6 +72,8 @@
           uid: firebaseUser.uid,
           photoURL: "http://tecdistro.com/wp-content/uploads/2015/04/user.png?49beef"
         })
+
+        this.user = firebaseUser
       }
     })
   </script>

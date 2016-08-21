@@ -28,7 +28,7 @@
       }
     </style>
     <div id="contenedor" class="layout horizontal">
-      <messenger-login></messenger-login>
+      <messenger-login user="{{user}}"></messenger-login>
       <messenger-home></messenger-home>
     </div>
   </template>
@@ -39,12 +39,15 @@
       is: 'messenger-app',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'Mundo',
-        },
+        user: {
+          type: Object,
+          observer: "_userChanged"
+        }
       },
-
+      
+      _userChanged: function () {
+        console.log(this.user)
+      }
     });
   </script>
 </dom-module>
