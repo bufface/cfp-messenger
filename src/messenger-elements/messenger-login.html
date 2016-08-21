@@ -37,6 +37,7 @@
 
       sendForm: function () {
         var email = this.$.email.value
+        var password = this.$.password.value
         this.$.auth.createUserWithEmailAndPassword(email, password)
               .then(function () {
                 console.log("Usuario Creado")
