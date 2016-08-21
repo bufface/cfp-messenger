@@ -1,4 +1,4 @@
-# \<cfp_messenger\>
+# Messenger
 
 Clon of Windows Messenger Chat
 
