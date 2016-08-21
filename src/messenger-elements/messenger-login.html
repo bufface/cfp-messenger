@@ -50,8 +50,8 @@
 
         if (this.signUp) {
           this.$.auth.createUserWithEmailAndPassword(this.email, this.password)
-              .then(function () {
-                console.log("Usuario Creado")
+              .then((user) => {
+                this.createUser(user)
               })
         } else {
           this.$.auth.signInWithEmailAndPassword(this.email, this.password)
@@ -59,6 +59,15 @@
                 console.log("Usuario Logeado")
               })
         }
+      },
+
+      createUser: function (firebaseUser) {
+        firebase.database().ref("/user/" + firebaseUser.uid).set({
+          name: firebaseUser.email,
+          email: firebaseUser.email,
+          uid: firebaseUser.uid,
+          photoURL: "http://tecdistro.com/wp-content/uploads/2015/04/user.png?49beef"
+        })
       }
     })
   </script>
