@@ -21,10 +21,10 @@
     <firebase-auth id="auth"></firebase-auth>
 
     <form is="iron-form" id="form">
-      <paper-input label="Correo electrónico" type="email" required="true" id="email"></paper-input>
-      <paper-input label="Contraseña" type="password" required="true" id="password"></paper-input>
+      <paper-input label="Correo electrónico" type="email" required="true" id="email" value="{{email}}"></paper-input>
+      <paper-input label="Contraseña" type="password" required="true" id="password" value="{{password}}"></paper-input>
 
-      <paper-checkbox id="checkbox">Crear Nueva Cuenta</paper-checkbox>
+      <paper-checkbox id="checkbox" active="{{signUp}}">Crear Nueva Cuenta</paper-checkbox>
 
       <div>
         <paper-button raised id="button">Ingresar</paper-button>
@@ -35,23 +35,26 @@
   <script>
     Polymer({
       is: "messenger-login",
-      
+
+      properties: {
+        email: String,
+        password: String,
+        signUp: Boolean
+      },
+
       ready: function () {
         this.$.button.addEventListener("click", () => this.sendForm())
       },
 
       sendForm: function () {
-        var email = this.$.email.value
-        var password = this.$.password.value
-        var checkbox = this.$.checkbox.active
 
-        if (checkbox) {
-          this.$.auth.createUserWithEmailAndPassword(email, password)
+        if (this.signUp) {
+          this.$.auth.createUserWithEmailAndPassword(this.email, this.password)
               .then(function () {
                 console.log("Usuario Creado")
               })
         } else {
-          this.$.auth.signInWithEmailAndPassword(email, password)
+          this.$.auth.signInWithEmailAndPassword(this.email, this.password)
               .then(function () {
                 console.log("Usuario Logeado")
               })
