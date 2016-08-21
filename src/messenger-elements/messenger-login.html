@@ -18,7 +18,7 @@
       }
     </style>
 
-    <firebase-auth id="auth"></firebase-auth>
+    <firebase-auth id="autenticacion"></firebase-auth>
 
     <form is="iron-form" id="form">
       <paper-input label="Correo electrónico" type="email" required="true" id="email" value="{{email}}"></paper-input>
@@ -47,18 +47,20 @@
       },
 
       ready: function () {
+        this.$.autenticacion.signOut();
         this.$.button.addEventListener("click", () => this.sendForm())
+        this.$.autenticacion.auth.onAuthStateChanged((u) => this.handleAuth(u))
       },
 
       sendForm: function () {
 
         if (this.signUp) {
-          this.$.auth.createUserWithEmailAndPassword(this.email, this.password)
+          this.$.autenticacion.createUserWithEmailAndPassword(this.email, this.password)
               .then((user) => {
                 this.createUser(user)
               })
         } else {
-          this.$.auth.signInWithEmailAndPassword(this.email, this.password)
+          this.$.autenticacion.signInWithEmailAndPassword(this.email, this.password)
               .then((user) => {
                 this.user = user
               })
@@ -74,6 +76,14 @@
         })
 
         this.user = firebaseUser
+      },
+
+      handleAuth: function (user) {
+        if (user) {
+          this.fire("login")
+        } else {
+          this.fire("logout")
+        }
       }
     })
   </script>
