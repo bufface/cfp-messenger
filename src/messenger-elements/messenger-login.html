@@ -5,7 +5,14 @@
 <dom-module id="messenger-login">
     <template>
         <style>
-
+            :host {
+                display: block;
+            }
+            paper-button {
+                color: white;
+                margin: 1em 0 0 0;
+                background-color: var(--accent-color);
+            }
         </style>
 
         <paper-input label="Correo electrónico" type="email" required></paper-input>
