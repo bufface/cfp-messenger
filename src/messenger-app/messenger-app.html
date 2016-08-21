@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import", href="../../bower_components/polymerfire/firebase-app.html">
-<link rel="import", href="../messenger-elements/messenger-login.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../messenger-elements/messenger-login.html">
+<link rel="import" href="../messenger-elements/messenger-home.html">
 
 <dom-module id="messenger-app">
   <template>
@@ -10,18 +12,25 @@
         api-key="AIzaSyBuLgkuGVwr8Cajfkb7iplcLzbXDbUGMqU"
     >
     </firebase-app>
-    <style>
+    <style include="iron-flex iron-flex-alignment">
       :host {
         display: block;
       }
       messenger-login {
-        width: 100%;
-        max-width: 400px;
         background-color: #EEE;
         padding: 1em;
+        width: 100%;
+      }
+      #contenedor {
+        height: 100vh;
+        width: 100%;
+        max-width: 400px;
       }
     </style>
-    <messenger-login></messenger-login>
+    <div id="contenedor" class="layout horizontal">
+      <messenger-login></messenger-login>
+      <messenger-home></messenger-home>
+    </div>
   </template>
 
   <script>
