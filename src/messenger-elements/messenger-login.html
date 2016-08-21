@@ -1,29 +1,47 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
 
 <dom-module id="messenger-login">
-    <template>
-        <style>
-            :host {
-                display: block;
-            }
-            paper-button {
-                color: white;
-                margin: 1em 0 0 0;
-                background-color: var(--accent-color);
-            }
-        </style>
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-button {
+        color: white;
+        margin: 1em 0 0 0;
+        background-color: var(--accent-color);
+      }
+    </style>
 
-        <paper-input label="Correo electrónico" type="email" required></paper-input>
-        <paper-input label="Contraseña" type="password" required></paper-input>
+    <firebase-auth id="auth"></firebase-auth>
 
-        <paper-button raised id="button">Ingresar</paper-button>
-    </template>
+    <form is="iron-form" id="form">
+      <paper-input label="Correo electrónico" type="email" required="true" id="email"></paper-input>
+      <paper-input label="Contraseña" type="password" required="true" id="password"></paper-input>
 
-    <script>
-        Polymer({
-            is: "messenger-login"
-        })
-    </script>
+      <paper-button raised id="button">Ingresar</paper-button>
+    </form>
+  </template>
+
+  <script>
+    Polymer({
+      is: "messenger-login",
+      
+      ready: function () {
+        this.$.button.addEventListener("click", () => this.sendForm())
+      },
+
+      sendForm: function () {
+        var email = this.$.email.value
+        this.$.auth.createUserWithEmailAndPassword(email, password)
+              .then(function () {
+                console.log("Usuario Creado")
+              })
+      }
+    })
+  </script>
 </dom-module>
