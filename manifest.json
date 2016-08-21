@@ -1,0 +1,7 @@
+{
+  "name": "cfp_messenger",
+  "short_name": "cfp_messenger",
+  "description": "Clon of Windows Messenger Chat",
+  "start_url": "/",
+  "display": "standalone"
+}
