@@ -26,12 +26,14 @@
         width: 100%;
         max-width: 400px;
       }
-      .oculto {
-        display: none;
-      }
     </style>
     <div id="contenedor" class="layout horizontal">
-      <messenger-login class="oculto" id="login" user="{{user}}" on-login="authenticate"></messenger-login>
+      <messenger-login
+          id="login" user="{{user}}"
+          on-login="authenticate"
+          on-logout="signOut"
+      >
+      </messenger-login>
       <messenger-home id="home"></messenger-home>
     </div>
   </template>
@@ -47,9 +49,14 @@
         }
       },
 
-      authenticate: function (e) {
+      authenticate: function () {
         this.$.login.hide()
         this.$.home.show()
+      },
+
+      signOut: function () {
+        this.$.login.show()
+        this.$.home.hide()
       }
     });
   </script>

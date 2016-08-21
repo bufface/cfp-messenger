@@ -1,0 +1,25 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="messenger-settings-menu">
+  <template>
+    <firebase-auth id="autenticacion" user="{{user}}"></firebase-auth>
+
+    <button id="logout">Cerrar Sesion</button>
+  </template>
+
+  <script>
+    Polymer({
+      is: "messenger-settings-menu",
+
+      properties: {
+        user: Object
+      },
+
+      ready: function () {
+        this.$.logout.addEventListener("click", () => {
+          this.$.autenticacion.signOut()
+        })
+      }
+    })
+  </script>
+</dom-module>

@@ -77,7 +77,6 @@
       },
 
       ready: function () {
-        this.$.autenticacion.signOut();
         this.$.button.addEventListener("click", () => this.sendForm())
         this.$.autenticacion.auth.onAuthStateChanged((u) => this.handleAuth(u))
         this.show()
