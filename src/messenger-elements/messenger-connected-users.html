@@ -28,6 +28,8 @@
         currentuser: {type: Object}
       },
       ready: function () {
+        this.usersAdded = {}
+
         this.$.connectedUsers.ref.on("child_added", (data) => {
           this._userAdded(data)
         })
@@ -38,6 +40,8 @@
       },
 
       _userAdded: function (data) {
+        if (this.usersAdded[data.key]) return
+
         var userRef = firebase.database().ref("/user/" + data.key)
 
         userRef.on("value", (data) => {
@@ -45,12 +49,19 @@
 
           if (!user) return
 
+          this.usersAdded[data.key] = true
           this.push("users", user)
         })
       },
 
       _userRemoved: function (data) {
-        this.removeChild(this.$$("#" + data.key))
+        try {
+          this.usersAdded[data.key] = null
+          this.removeChild(this.$$("#" + data.key))
+        }
+        catch (e) {
+          this.usersAdded[data.key] = true
+        }
       }
     })
   </script>
