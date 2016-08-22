@@ -53,6 +53,17 @@
         currentuser: {type: Object}
       },
       ready: function () {
+        this.$.card.addEventListener("click", () => {
+          var roomKey = ""
+
+          if (this.user.uid > this.currentUser.uid) {
+            roomKey = this.currentUser.uid + this.user.uid
+          }
+          else {
+            roomKey = this.user.uid + this.currentUser.uid
+          }
+        })
+
         if (this.user.uid === this.currentuser.uid) {
           this.set("user.name", "Yo")
         }
