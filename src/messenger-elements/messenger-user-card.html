@@ -53,20 +53,28 @@
         currentuser: {type: Object}
       },
       ready: function () {
-        this.$.card.addEventListener("click", () => {
-          var roomKey = ""
-
-          if (this.user.uid > this.currentUser.uid) {
-            roomKey = this.currentUser.uid + this.user.uid
-          }
-          else {
-            roomKey = this.user.uid + this.currentUser.uid
-          }
-        })
-
         if (this.user.uid === this.currentuser.uid) {
           this.set("user.name", "Yo")
         }
+
+        this.$.card.addEventListener("click", () => {
+          var roomKey = ""
+          var usersJSON = {}
+
+          if (this.user.uid > this.currentuser.uid) {
+            roomKey = this.currentuser.uid + this.user.uid
+            usersJSON[this.currentuser.uid] = true
+            usersJSON[this.user.uid] = true
+          }
+          else {
+            roomKey = this.user.uid + this.currentuser.uid
+            usersJSON[this.user.uid] = true
+            usersJSON[this.currentuser.uid] = true
+          }
+
+          var roomRef = firebase.database().ref("rooms/" + roomKey)
+          roomRef.set(usersJSON)
+        })
       }
     })
   </script>
