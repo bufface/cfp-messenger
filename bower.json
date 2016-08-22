@@ -7,7 +7,8 @@
     "polymerfire": "firebase/polymerfire",
     "paperselements": "PolymerElements/paper-elements",
     "ironelements": "PolymerElements/iron-elements",
-    "image-mask": "^1.1.4"
+    "image-mask": "^1.1.4",
+    "app-route": "PolymerElements/app-route"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
