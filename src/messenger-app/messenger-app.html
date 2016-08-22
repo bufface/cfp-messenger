@@ -6,23 +6,23 @@
 <link rel="import" href="../messenger-elements/messenger-home.html">
 
 <dom-module id="messenger-app">
-  <template>
-    <style include="iron-flex iron-flex-alignment">
-      :host {
-        display: block;
-      }
-      messenger-login {
-        background-color: #EEE;
-        padding: 1em;
-        width: 100%;
-      }
-      #contenedor {
-        height: 100vh;
-        width: 100%;
-        max-width: 400px;
-      }
-    </style>
+  <style include="iron-flex iron-flex-alignment">
+    :host {
+      display: block;
+    }
+    messenger-login {
+      background-color: #EEE;
+      padding: 1em;
+      width: 100%;
+    }
+    #contenedor {
+      height: 100vh;
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
 
+  <template>
     <firebase-app
       auth-domain="messenger-ecf31.firebaseapp.com"
       database-url="https://messenger-ecf31.firebaseio.com"

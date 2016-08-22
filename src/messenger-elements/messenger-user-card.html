@@ -74,6 +74,8 @@
 
           var roomRef = firebase.database().ref("rooms/" + roomKey)
           roomRef.set(usersJSON)
+
+          window.open("/rooms/" + roomKey)
         })
       }
     })
