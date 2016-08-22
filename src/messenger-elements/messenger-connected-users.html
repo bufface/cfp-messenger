@@ -13,7 +13,7 @@
       as="u"
       id="usersElement"
     >
-      <messenger-user-card user$="[[u]]" id="[[u.uid]]"></messenger-user-card>
+      <messenger-user-card user="[[u]]" id="[[u.uid]]" currentuser="[[currentuser]]"></messenger-user-card>
     </template>
   </template>
 
@@ -24,7 +24,8 @@
         users: {
           type: Object,
           value: function () { return [] }
-        }
+        },
+        currentuser: {type: Object}
       },
       ready: function () {
         this.$.connectedUsers.ref.on("child_added", (data) => {

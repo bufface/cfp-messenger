@@ -31,7 +31,7 @@
       <img src="http://tecdistro.com/wp-content/uploads/2015/04/user.png?49beef" height="150">
       <messenger-settings-menu></messenger-settings-menu>
     </header>
-    <messenger-connected-users></messenger-connected-users>
+    <messenger-connected-users currentuser="{{user}}"></messenger-connected-users>
   </template>
 
   <script>
@@ -47,6 +47,7 @@
           type: Boolean,
           value: false
         },
+        user: {type: Object},
         animationConfig: {
           value: function () {
             return {
