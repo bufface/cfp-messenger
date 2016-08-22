@@ -58,6 +58,12 @@
         }
       },
 
+      ready: function () {
+        window.addEventListener("unload", () => {
+          this.unconnect()
+        })
+      }
+
       authenticate: function () {
         this.connect()
         this.$.login.hide()
@@ -76,7 +82,9 @@
       },
 
       unconnect: function () {
-        firebase.database.ref("/connected/" + this.user.uid).remove()
+        if (this.user) {
+          firebase.database.ref("/connected/" + this.user.uid).remove()
+        }
       }
     });
   </script>
