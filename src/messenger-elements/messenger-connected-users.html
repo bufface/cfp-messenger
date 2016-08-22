@@ -13,7 +13,7 @@
       as="u"
       id="usersElement"
     >
-      <messenger-user-card user$="[[u]]"></messenger-user-card>
+      <messenger-user-card user$="[[u]]" id="[[u.uid]]"></messenger-user-card>
     </template>
   </template>
 
@@ -49,7 +49,7 @@
       },
 
       _userRemoved: function (data) {
-        console.info('Holis')
+        this.removeChild(this.$$("#" + data.key))
       }
     })
   </script>
