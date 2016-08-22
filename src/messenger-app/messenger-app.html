@@ -59,14 +59,24 @@
       },
 
       authenticate: function () {
+        this.connect()
         this.$.login.hide()
         this.$.home.show()
       },
 
       signOut: function () {
+        this.unconnect()
         this.user = null
         this.$.login.show()
         this.$.home.hide()
+      },
+      
+      connect: function () {
+        firebase.database.ref("/connected/" + this.user.uid).set("true")
+      },
+
+      unconnect: function () {
+        firebase.database.ref("/connected/" + this.user.uid).remove()
       }
     });
   </script>
