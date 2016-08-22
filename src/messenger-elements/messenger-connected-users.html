@@ -1,55 +1,56 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
+<link rel="import" href="./messenger-user-card.html">
 
 <dom-module id="messenger-connected-users">
-    <style></style>
+  <style></style>
 
-    <template>
-        <firebase-document path="/connected" id="connectedUsers"></firebase-document>
+  <template>
+    <firebase-document path="/connected" id="connectedUsers"></firebase-document>
 
-        <template
-            is="dom-repeat" items="{{users}}"
-            as="u"
-            id="usersElement"
-        >
-            <li>{{u.name}}</li>
-        </template>
+    <template
+      is="dom-repeat" items="{{users}}"
+      as="u"
+      id="usersElement"
+    >
+      <messenger-user-card user$="[[u]]"></messenger-user-card>
     </template>
+  </template>
 
-    <script>
-        Polymer({
-            id: "messenger-connected-users",
-            properties: {
-                users: {
-                    type: Object,
-                    value: function () { return [] }
-                }
-            },
-            ready: function () {
-                this.$.connectedUsers.ref.on("child_added", (data) => {
-                    this._userAdded(data)
-                })
-
-                this.$.connectedUsers.ref.on("child_removed", (data) => {
-                    this._userRemoved(data)
-                })
-            },
-
-            _userAdded: function (data) {
-                var userRef = firebase.database().ref("/user/" + data.key)
-
-                userRef.on("value", (data) => {
-                    var user = data.val()
-
-                    if (!user) return
-
-                    this.push("users", user)
-                })
-            },
-
-            _userRemoved: function (data) {
-                console.info('Holis')
-            }
+  <script>
+    Polymer({
+      id: "messenger-connected-users",
+      properties: {
+        users: {
+          type: Object,
+          value: function () { return [] }
+        }
+      },
+      ready: function () {
+        this.$.connectedUsers.ref.on("child_added", (data) => {
+          this._userAdded(data)
         })
-    </script>
+
+        this.$.connectedUsers.ref.on("child_removed", (data) => {
+          this._userRemoved(data)
+        })
+      },
+
+      _userAdded: function (data) {
+        var userRef = firebase.database().ref("/user/" + data.key)
+
+        userRef.on("value", (data) => {
+          var user = data.val()
+
+          if (!user) return
+
+          this.push("users", user)
+        })
+      },
+
+      _userRemoved: function (data) {
+        console.info('Holis')
+      }
+    })
+  </script>
 </dom-module>
