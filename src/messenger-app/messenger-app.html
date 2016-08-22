@@ -62,7 +62,7 @@
         window.addEventListener("unload", () => {
           this.unconnect()
         })
-      }
+      },
 
       authenticate: function () {
         this.connect()
@@ -78,12 +78,12 @@
       },
       
       connect: function () {
-        firebase.database.ref("/connected/" + this.user.uid).set("true")
+        firebase.database().ref("/connected/" + this.user.uid).set("true")
       },
 
       unconnect: function () {
         if (this.user) {
-          firebase.database.ref("/connected/" + this.user.uid).remove()
+          firebase.database().ref("/connected/" + this.user.uid).remove()
         }
       }
     });

@@ -12,21 +12,29 @@
         Polymer({
             id: "messenger-connected-users",
             ready: function () {
-                this.$.connectedUsers.ref().on("child_added", (data) => {
+                this.$.connectedUsers.ref.on("child_added", (data) => {
                     this._userAdded(data)
                 })
 
-                this.$.connectedUsers.ref().on("child_removed", (data) => {
+                this.$.connectedUsers.ref.on("child_removed", (data) => {
                     this._userRemoved(data)
                 })
             },
 
-            _userAdded: function () {
-                
+            _userAdded: function (data) {
+                var userRef = firebase.database().ref("/user/" + data.key)
+
+                userRef.on("value", (data) => {
+                    var user = data.val()
+
+                    console.log(user);
+                    if (!user) return
+
+                })
             },
 
-            _userRemoved: function () {
-                
+            _userRemoved: function (data) {
+                console.info('Holis')
             }
         })
     </script>
