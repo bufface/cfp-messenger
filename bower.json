@@ -6,7 +6,8 @@
     "polymer": "Polymer/polymer#^1.4.0",
     "polymerfire": "firebase/polymerfire",
     "paperselements": "PolymerElements/paper-elements",
-    "ironelements": "PolymerElements/iron-elements"
+    "ironelements": "PolymerElements/iron-elements",
+    "image-mask": "^1.1.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
