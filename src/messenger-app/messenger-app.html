@@ -67,15 +67,11 @@
 
       authenticate: function () {
         this.connect()
-        this.$.login.hide()
-        this.$.home.show()
       },
 
       signOut: function () {
         this.unconnect()
         this.user = null
-        this.$.login.show()
-        this.$.home.hide()
       },
       
       connect: function () {

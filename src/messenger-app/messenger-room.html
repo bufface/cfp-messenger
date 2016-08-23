@@ -6,6 +6,9 @@
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../messenger-elements/messenger-form.html">
+<link rel="import" href="../messenger-elements/messenger-login.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../behaviors/login-behaviors.html">
 
 <dom-module id="messenger-room">
   <style include="iron-flex iron-flex-alignment">
@@ -14,7 +17,7 @@
       @apply(--paper-font-common-base);
     }
 
-    #main {
+    #home {
       height: 100vh;
       padding: 1em;
       background-color: var(--paper-grey-200);
@@ -31,6 +34,15 @@
   </style>
 
   <template>
+    <firebase-app
+        auth-domain="messenger-ecf31.firebaseapp.com"
+        database-url="https://messenger-ecf31.firebaseio.com"
+        api-key="AIzaSyBuLgkuGVwr8Cajfkb7iplcLzbXDbUGMqU"
+    >
+    </firebase-app>
+
+    <messenger-login id="login" user="{{currentuser}}"></messenger-login>
+
     <app-location route="{{route}}"></app-location>
 
     <app-route
@@ -40,7 +52,7 @@
     >
     </app-route>
 
-    <div id="main">
+    <div id="home">
       <div class="layout horizontal">
         <div class="flex-auto" id="menssages">
           <h2>Messages</h2>
@@ -52,7 +64,7 @@
 
       <div class="layout horizontal">
         <div class="flex-auto" id="form">
-          <messenger-form></messenger-form>
+          <messenger-form user="{{currentuser}}" roomkey="{{routeData.roomKey}}"></messenger-form>
         </div>
         <div class="flex-auto avatar">
           <image-mask src="http://findicons.com/files/icons/1072/face_avatars/300/a05.png" size="150"></image-mask>
@@ -64,10 +76,12 @@
   <script>
     Polymer({
       is: "messenger-room",
-      attached: function () {
-        console.log(this.route)
-        console.log(this.routeData)
-      }
+
+      properties: {
+        currentuser: Object
+      },
+
+      behaviors: [MessengerApp.Login]
     })
   </script>
 </dom-module>

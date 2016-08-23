@@ -43,19 +43,22 @@
   <script>
     Polymer({
       is: "messenger-form",
+
       properties: {
         roomkey: String,
-        uid: String,
+        user: Object,
         message: String
       },
-      ready: function () {
+
+      attached: function () {
         this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
         this.$.button.addEventListener("click", () => this.sendMessage())
       },
+
       sendMessage: function () {
         this.dbRef.push({
           body: this.message,
-          user: this.uid,
+          user: this.user.uid,
           kynd: "message"
         })
       }
