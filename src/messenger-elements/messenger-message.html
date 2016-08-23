@@ -1,25 +1,17 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="message-message">
+<dom-module id="messenger-message">
   <style></style>
 
-  <template></template>
+  <template>
+    <p>{{message.body}}</p>
+  </template>
 
   <script>
     Polymer({
-      is: "message-message",
-
+      is: "messenger-message",
       properties: {
-        roomkey: String,
-      },
-      
-      attached: function () {
-        this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
-        this.dbRef.on("child_added", (data) => this.newMessage(data))
-      },
-
-      newMessage: function (data) {
-        console.log(data.val())
+        message: Object
       }
     })
   </script>

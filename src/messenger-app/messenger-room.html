@@ -7,7 +7,7 @@
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../messenger-elements/messenger-form.html">
 <link rel="import" href="../messenger-elements/messenger-login.html">
-<link rel="import" href="../messenger-elements/messenger-message.html">
+<link rel="import" href="../messenger-elements/messenger-messages.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../behaviors/login-behaviors.html">
 
@@ -56,7 +56,7 @@
     <div id="home">
       <div class="layout horizontal">
         <div class="flex-auto" id="menssages">
-          <message-message roomkey="{{routeData.roomKey}}"></message-message>
+          <messenger-messages roomkey="{{routeData.roomKey}}"></messenger-messages>
         </div>
         <div class="flex-auto avatar">
           <image-mask src="http://tecdistro.com/wp-content/uploads/2015/04/user.png?49beef" size="150"></image-mask>
