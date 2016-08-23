@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/image-mask/image-mask.html">
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../messenger-elements/messenger-form.html">
 
 <dom-module id="messenger-room">
   <style include="iron-flex iron-flex-alignment">
@@ -51,7 +52,7 @@
 
       <div class="layout horizontal">
         <div class="flex-auto" id="form">
-          <h2>Form</h2>
+          <messenger-form></messenger-form>
         </div>
         <div class="flex-auto avatar">
           <image-mask src="http://findicons.com/files/icons/1072/face_avatars/300/a05.png" size="150"></image-mask>
