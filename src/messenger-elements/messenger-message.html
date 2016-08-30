@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="./messenger-user.html">
 
 <dom-module id="messenger-message">
   <style>
@@ -27,8 +28,10 @@
   </style>
 
   <template>
+   <messenger-user uid="{{message.user}}" user="{{user}}"></messenger-user>
+
     <div class="bubble">
-      <b>Cristian</b>
+      <b>{{user.name}}:</b>
       {{message.body}}
     </div>
   </template>
@@ -36,8 +39,12 @@
   <script>
     Polymer({
       is: "messenger-message",
+
       properties: {
-        message: Object
+        message: Object,
+        user: {
+          type: Object
+        }
       }
     })
   </script>

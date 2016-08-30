@@ -98,7 +98,6 @@
       },
 
       sendForm: function () {
-
         if (this.signUp) {
           this.$.autenticacion.createUserWithEmailAndPassword(this.email, this.password)
               .then((user) => {

@@ -48,10 +48,12 @@
   <script>
     Polymer({
       is: "messenger-user-card",
+
       properties: {
         user: {type: Object},
         currentuser: {type: Object}
       },
+      
       ready: function () {
         if (this.user.uid === this.currentuser.uid) {
           this.set("user.name", "Yo")
