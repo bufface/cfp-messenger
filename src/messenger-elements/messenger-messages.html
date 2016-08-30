@@ -13,7 +13,7 @@
 
   <template>
     <template is="dom-repeat" id="messagesEl" items="{{messages}}" as="message">
-      <messenger-message message="{{message}}"></messenger-message>
+      <messenger-message uid="{{uid}}" message="{{message}}"></messenger-message>
     </template>
   </template>
 
@@ -25,10 +25,11 @@
         roomkey: String,
         messages: {
           type: Array,
-          value: function () { return []; }
+          value: function () { return []; },
+          uid: String
         }
       },
-      
+
       attached: function () {
         this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
         this.dbRef.on("child_added", (data) => this.newMessage(data))
