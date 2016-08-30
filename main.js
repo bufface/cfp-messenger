@@ -4,9 +4,11 @@ const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow;
 
+require("./server");
+
 function createWindow() {
-  main = new BrowserWindow({width: 400, height: 600});
-  mainWindow.loadURL("file://" + __dirname + "/index.html");
+  mainWindow = new BrowserWindow({width: 400, height: 600});
+  mainWindow.loadURL("http://localhost:8080");
 
   mainWindow.webContents.openDevTools();
 
