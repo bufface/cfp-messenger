@@ -8,6 +8,7 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="./messenger-settings-menu.html">
 <link rel="import" href="./messenger-connected-users.html">
+<link rel="import" href="./messenger-user.html">
 
 <dom-module id="messenger-home">
   <style>
@@ -42,6 +43,8 @@
   </style>
 
   <template>
+    <messenger-user uid="{{user.uid}}" user="{{userData}}"></messenger-user>
+
     <header>
       <image-mask src="{{userData.photoURL}}" size="150"></image-mask>
       <messenger-settings-menu></messenger-settings-menu>
@@ -104,7 +107,7 @@
         this.hide()
         this.selected = 0
       },
-      
+
       hide: function () {
         this.opened = false
         this.playAnimation("exit")
@@ -118,18 +121,6 @@
 
       _animationFinished: function () {
         if (!this.opened) this.style.display = "none"
-      },
-      
-      findUser: function () {
-        var userRef = firebase.database().ref("/user/" + this.user.uid)
-
-        userRef.on("value", (data) => {
-          this.userData = data.val()
-        })
-      },
-
-      _userChanged: function () {
-        if (this.user !== null) this.findUser()
       }
     })
   </script>
