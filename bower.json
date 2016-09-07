@@ -8,7 +8,8 @@
     "paperselements": "PolymerElements/paper-elements",
     "ironelements": "PolymerElements/iron-elements",
     "image-mask": "^1.1.4",
-    "app-route": "PolymerElements/app-route"
+    "app-route": "PolymerElements/app-route",
+    "visibilityjs": "^1.2.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

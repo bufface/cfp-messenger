@@ -10,12 +10,16 @@
     <audio id="audio" src="./notification.mp3"></audio>
   </template>
 
+  <script src="/visibility.js"></script>
+
   <script>
     Polymer({
       is: "messenger-audio-notification",
 
       ready: function () {
-        this.$.audio.play();
+        if (Visibility.hidden()) {
+          this.$.audio.play();
+        }
       }
     });
   </script>
