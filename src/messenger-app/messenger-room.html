@@ -63,7 +63,7 @@
           <messenger-messages uid="{{currentuser.uid}}" roomkey="{{routeData.roomKey}}"></messenger-messages>
         </div>
         <div class="flex-auto avatar">
-          <image-mask src="http://tecdistro.com/wp-content/uploads/2015/04/user.png?49beef" size="150"></image-mask>
+          <image-mask src="{{friendData.photoURL}}" size="150"></image-mask>
         </div>
       </div>
 
@@ -72,7 +72,7 @@
           <messenger-form user="{{currentuser}}" roomkey="{{routeData.roomKey}}"></messenger-form>
         </div>
         <div class="flex-auto avatar">
-          <image-mask src="http://findicons.com/files/icons/1072/face_avatars/300/a05.png" size="150"></image-mask>
+          <image-mask src="{{userData.photoURL}}" size="150"></image-mask>
         </div>
       </div>
     </div>
@@ -83,10 +83,52 @@
       is: "messenger-room",
 
       properties: {
-        currentuser: Object
+        currentuser: {
+          type: Object,
+          observer: "_userChanged"
+        },
+        friendid: String,
+        friendData: Object,
+        userData: Object
       },
 
-      behaviors: [MessengerApp.Login]
+      behaviors: [MessengerApp.Login],
+
+      _userChanged: function () {
+        if (this.currentuser) {
+          this.findFriendID()
+        }
+      },
+
+      findFriendID: function () {
+        firebase.database().ref("/rooms/" + this.routeData.roomKey)
+                .on("value", (data) => {
+                  var room = data.val()
+
+                  for (uid in room) {
+                    if (this.currentuser.uid != uid) {
+                      this.friendid = uid
+                    }
+                  }
+
+                  this.findFriendData()
+                  this.findUserData()
+                })
+      },
+
+      findFriendData: function () {
+        firebase.database().ref("/user/" + this.friendid)
+                .on("value", (data) => {
+                  this.friendData = data.val()
+                })
+      },
+
+      findUserData: function () {
+        firebase.database().ref("/user/" + this.currentuser.uid)
+                .on("value", (data) => {
+                  this.userData = data.val()
+                })
+      }
     })
   </script>
 </dom-module>
