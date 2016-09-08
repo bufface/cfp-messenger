@@ -1,0 +1,47 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<dom-module id="messenger-web-notification">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+  </template>
+
+  <script src="../../../bower_components/push.js/push.min.js"></script>
+
+  <script>
+    Polymer({
+      is: "messenger-web-notification",
+
+      properties: {
+        message: Object,
+        user: {
+          type: Object,
+          observer: "_userChanged"
+        },
+        uid: String
+      },
+
+      sendPush: function () {
+        if (this.isFriend()) {
+          Push.create(this.user.name + ":", {
+            body: this.message.body,
+            timeout: 3000,
+            icon: this.user.photoURL
+          })
+        }
+      },
+
+      _userChanged: function () {
+        this.sendPush()
+      },
+
+      isFriend: function () {
+        return this.uid !== this.message.user
+      }
+    });
+  </script>
+</dom-module>

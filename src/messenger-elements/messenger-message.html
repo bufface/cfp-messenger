@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="./messenger-user.html">
 <link rel="import" href="./messenger-audio-notification/messenger-audio-notification.html">
+<link rel="import" href="./messenger-web-notification.html">
 
 <dom-module id="messenger-message">
   <style>
@@ -42,6 +43,7 @@
 
   <template>
     <messenger-audio-notification></messenger-audio-notification>
+    <messenger-web-notification uid="{{uid}}" message="{{message}}" user="{{user}}"></messenger-web-notification>
 
     <messenger-user uid="{{message.user}}" user="{{user}}"></messenger-user>
 
