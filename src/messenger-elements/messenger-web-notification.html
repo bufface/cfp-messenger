@@ -11,6 +11,7 @@
   </template>
 
   <script src="../../../bower_components/push.js/push.min.js"></script>
+  <script src="/visibility.js"></script>
 
   <script>
     Polymer({
@@ -27,14 +28,14 @@
 
       sendPush: function () {
         if (!this.isFriend()) return
-
+        
         if (this.inElectron()) {
           new Notification(this.user.name + ":", {
             body: this.message.body,
             icon: this.user.photoURL
           })
         }
-        else {
+        else if (Visibility.hidden()) {
           Push.create(this.user.name + ":", {
             body: this.message.body,
             timeout: 3000,

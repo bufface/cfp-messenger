@@ -8,7 +8,7 @@ require("./server");
 
 function createWindow() {
   mainWindow = new BrowserWindow({width: 400, height: 600});
-  mainWindow.loadURL("http://localhost:8080");
+  mainWindow.loadURL("http://localhost:8080/rooms/t3361MetIfg7o3PA5nAKeszmbRF2y4XL9rL2G9dYjiWjl8XjZlgbwgE3");
 
   mainWindow.webContents.openDevTools();
 
