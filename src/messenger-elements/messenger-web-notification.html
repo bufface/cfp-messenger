@@ -26,7 +26,15 @@
       },
 
       sendPush: function () {
-        if (this.isFriend()) {
+        if (!this.isFriend()) return
+
+        if (this.inElectron()) {
+          new Notification(this.user.name + ":", {
+            body: this.message.body,
+            icon: this.user.photoURL
+          })
+        }
+        else {
           Push.create(this.user.name + ":", {
             body: this.message.body,
             timeout: 3000,
@@ -41,6 +49,10 @@
 
       isFriend: function () {
         return this.uid !== this.message.user
+      },
+
+      inElectron: function () {
+        return window && window.process && window.process.type
       }
     });
   </script>
