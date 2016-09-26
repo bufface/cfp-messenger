@@ -18,6 +18,12 @@
   </template>
 
   <script>
+    function scrollToBottom(e) {
+      e.scrollTop = e.scrollHeight - e.getBoundingClientRect().height
+    }
+  </script>
+
+  <script>
     Polymer({
       is: "messenger-messages",
 
@@ -30,6 +36,10 @@
         }
       },
 
+      listeners: {
+        "added": "scroll"
+      },
+
       attached: function () {
         this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
         this.dbRef.on("child_added", (data) => this.newMessage(data))
@@ -37,6 +47,10 @@
 
       newMessage: function (data) {
         this.push("messages", data.val())
+      },
+
+      scroll: function () {
+        scrollToBottom(this)
       }
     })
   </script>

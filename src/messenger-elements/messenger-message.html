@@ -71,6 +71,8 @@
         if (this.isFriend()) {
           this.$.bubble.classList.add("right")
         }
+
+        this.fire("added")
       },
 
       isFriend: function () {
