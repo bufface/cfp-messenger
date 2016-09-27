@@ -35,7 +35,7 @@
             icon: this.user.photoURL
           })
         }
-        else if (Visibility.hidden()) {
+        else if (this.message.notification) {
           Push.create(this.user.name + ":", {
             body: this.message.body,
             timeout: 3000,

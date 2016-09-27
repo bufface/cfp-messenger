@@ -63,7 +63,8 @@
         this.dbRef.push({
           body: this.message,
           user: this.user.uid,
-          kynd: "message"
+          kynd: "message",
+          created_at: firebase.database.ServerValue.TIMESTAMP
         })
       }
     })

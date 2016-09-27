@@ -42,11 +42,23 @@
 
       attached: function () {
         this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
-        this.dbRef.on("child_added", (data) => this.newMessage(data))
+
+        this.dbRef.orderByChild("created_at")
+                  .limitToLast(50)
+                  .endAt(Date.now())
+                  .on("child_added", (d) => this.newMessage(d, false))
+
+        this.dbRef.orderByChild("created_at")
+                  .startAt(Date.now())
+                  .on("child_added", (d) => this.newMessage(d, true))
+        // this.dbRef.on("child_added", (data) => this.newMessage(data))
       },
 
-      newMessage: function (data) {
-        this.push("messages", data.val())
+      newMessage: function (data, notification) {
+        var message = data.val()
+        message.notification = notification
+        
+        this.push("messages", message)
       },
 
       scroll: function () {
