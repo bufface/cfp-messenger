@@ -8,6 +8,7 @@
 <link rel="import" href="../messenger-elements/messenger-form.html">
 <link rel="import" href="../messenger-elements/messenger-login.html">
 <link rel="import" href="../messenger-elements/messenger-messages.html">
+<link rel="import" href="../messenger-elements/messenger-actions-bar.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../behaviors/login-behaviors.html">
 
@@ -35,6 +36,11 @@
     .avatar {
       max-width: 18%;
       margin-left: 2%;
+    }
+
+    .actions {
+      text-align: right;
+      margin: 5px 0;
     }
   </style>
 
@@ -69,6 +75,9 @@
 
       <div class="layout horizontal">
         <div class="flex-auto" id="form">
+          <div class="actions">
+            <messenger-actions-bar></messenger-actions-bar>
+          </div>
           <messenger-form user="{{currentuser}}" roomkey="{{routeData.roomKey}}"></messenger-form>
         </div>
         <div class="flex-auto avatar">

@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icons/device-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+
+<dom-module id="messenger-actions-bar">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+      }
+    </style>
+
+    <paper-button class="indigo" on-tap="ring">
+      <iron-icon icon="device:access-alarm"></iron-icon>
+      Zumbido
+    </paper-button>
+  </template>
+  <script>
+    Polymer({
+      is: 'messenger-actions-bar',
+
+      ring: function () {
+        console.log("Enviar Zumbido")
+      }
+    });
+  </script>
+</dom-module>
