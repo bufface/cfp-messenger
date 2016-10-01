@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="./messenger-message.html">
+<link rel="import" href="./messenger-ring/messenger-ring.html">
 
 <dom-module id="messenger-messages">
   <style>
@@ -58,7 +59,19 @@
         var message = data.val()
         message.notification = notification
         
-        this.push("messages", message)
+        if (message.kind == "ring") {
+          this.ring(message.user, data.key)
+        } else {
+          this.push("messages", message)
+        }
+      },
+
+      ring: function (currentUserID, key) {
+        var ringer = document.createElement("messenger-ring")
+
+        this.appendChild(ringer)
+
+        firebase.database().ref("/messages/" + this.roomkey + "/" + key).remove()
       },
 
       scroll: function () {
