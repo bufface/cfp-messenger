@@ -1,0 +1,22 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<dom-module id="messenger-ring">
+  <template>
+    <style>
+      audio {
+        display: none;
+      }
+    </style>
+
+    <audio id="audio" src="./audio.mp3"></audio>
+  </template>
+  <script>
+    Polymer({
+      is: 'messenger-ring',
+
+      attached: function () {
+        this.$.audio.play()
+      }
+    });
+</script>
+</dom-module>

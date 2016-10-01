@@ -20,8 +20,16 @@
     Polymer({
       is: 'messenger-actions-bar',
 
+      attached: function () {
+        this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
+      },
+
       ring: function () {
-        console.log("Enviar Zumbido")
+        this.dbRef.push({
+          kind: "ring",
+          user: this.uid,
+          created_at: firebase.database.ServerValue.TIMESTAMP
+        })
       }
     });
   </script>

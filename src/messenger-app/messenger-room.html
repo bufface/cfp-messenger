@@ -76,7 +76,7 @@
       <div class="layout horizontal">
         <div class="flex-auto" id="form">
           <div class="actions">
-            <messenger-actions-bar></messenger-actions-bar>
+            <messenger-actions-bar uid="{{currentuser.uid}}" roomkey="{{routeData.roomKey}}"></messenger-actions-bar>
           </div>
           <messenger-form user="{{currentuser}}" roomkey="{{routeData.roomKey}}"></messenger-form>
         </div>
