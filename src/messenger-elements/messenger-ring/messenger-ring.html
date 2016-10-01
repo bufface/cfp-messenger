@@ -15,7 +15,10 @@
       is: 'messenger-ring',
 
       attached: function () {
-        this.$.audio.play()
+
+        if (this.senderUID != this.currentUser) {
+          this.$.audio.play()
+        }
       }
     });
 </script>

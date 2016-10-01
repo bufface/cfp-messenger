@@ -66,8 +66,11 @@
         }
       },
 
-      ring: function (currentUserID, key) {
+      ring: function (senderUID, key) {
         var ringer = document.createElement("messenger-ring")
+
+        ringer.currentUser = this.uid
+        ringer.sender = senderUID
 
         this.appendChild(ringer)
 
