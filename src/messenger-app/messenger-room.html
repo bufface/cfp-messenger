@@ -11,12 +11,14 @@
 <link rel="import" href="../messenger-elements/messenger-actions-bar.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../behaviors/login-behaviors.html">
+<link rel="stylesheet" type="text/css" href="../../bower_components/csshake/dist/csshake.min.css">
 
 <dom-module id="messenger-room">
   <style include="iron-flex iron-flex-alignment">
     :host {
       display: block;
       @apply(--paper-font-common-base);
+      width: 100%;
     }
 
     #main {
@@ -102,6 +104,8 @@
       },
 
       behaviors: [MessengerApp.Login],
+      
+      listeners: {"ring": "shake"},
 
       _userChanged: function () {
         if (this.currentuser) {
@@ -137,7 +141,14 @@
                 .on("value", (data) => {
                   this.userData = data.val()
                 })
-      }
+      },
+      
+      shake: function () {
+        this.classList.add("shake")
+        this.classList.add("shake-cosntant")
+
+        setTimeout(() => this.classList.remove("shake"), 1000)
+      },
     })
   </script>
 </dom-module>

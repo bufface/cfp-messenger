@@ -10,7 +10,8 @@
     "image-mask": "^1.1.4",
     "app-route": "PolymerElements/app-route",
     "visibilityjs": "^1.2.4",
-    "push.js": "^0.0.11"
+    "push.js": "^0.0.11",
+    "csshake": "^1.5.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

@@ -16,7 +16,8 @@
 
       attached: function () {
 
-        if (this.senderUID != this.currentUser) {
+        if (this.sender != this.currentUser) {
+          this.fire("ring");
           this.$.audio.play()
         }
       }
