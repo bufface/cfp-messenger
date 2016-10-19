@@ -57,14 +57,30 @@
 
       attached: function () {
         this.dbRef = firebase.database().ref("/messages/" + this.roomkey)
-        this.$.button.addEventListener("click", () => this.sendMessage())
+        this.$.button.addEventListener("click", () => this.push())
       },
 
-      sendMessage: function () {
+      push: function () {
+        if (this.message.charAt(0) == "/") {
+          return this.processSlashCommand(this.message)
+        }
+
+        this.sendMessage(this.message, "message")
+      },
+
+      processSlashCommand: function (message) {
+        var commandInfo = slashCommand(message)
+        
+        if (commandInfo.command == "gif") {
+          // Enviar el GIF
+        }
+      },
+
+      sendMessage: function (message, kind) {
         this.dbRef.push({
-          body: this.message,
+          body: message,
           user: this.user.uid,
-          kynd: "message",
+          kynd: kind,
           created_at: firebase.database.ServerValue.TIMESTAMP
         })
 
