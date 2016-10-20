@@ -12,7 +12,7 @@
   </style>
 
   <template>
-    <video id="video" loop="true" height="200" src$="{{url}}" autoplay="true"></video>
+    <video id="video" loop="true" height="200" src$="{{url}}" autoplay="true" on-tap="_tooglePlay"></video>
   </template>
 
   <script>
@@ -21,6 +21,14 @@
 
       properties: {
         url: String
+      },
+
+      _tooglePlay: function () {
+        if (this.$.video.paused) {
+          return this.$.video.play()
+        }
+
+        this.$.video.pause()
       }
     })
   </script>
