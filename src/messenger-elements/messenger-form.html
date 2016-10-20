@@ -44,6 +44,7 @@
     </form>
   </template>
   <script src="/slash.js"></script>
+  <script src="./messenger-giphy/messenger-giphy.js"></script>
 
   <script>
     Polymer({
@@ -72,8 +73,8 @@
         var commandInfo = slashCommand(message)
         
         if (commandInfo.command == "gif") {
-          MGiphy.getUrlAsync("", function(){
-            
+          MGiphy.getUrlAsync(commandInfo.body, (url) => {
+            this.sendMessage(url, "gif")
           })
         }
       },

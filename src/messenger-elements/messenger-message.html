@@ -2,6 +2,7 @@
 <link rel="import" href="./messenger-user.html">
 <link rel="import" href="./messenger-audio-notification/messenger-audio-notification.html">
 <link rel="import" href="./messenger-web-notification.html">
+<link rel="import" href="./messenger-giphy/messenger-giphy.html">
 
 <dom-module id="messenger-message">
   <style>
@@ -49,7 +50,7 @@
 
     <div class="bubble" id="bubble">
       <b>{{user.name}}:</b>
-      {{message.body}}
+      <span id="message">{{message.body}}</span>
     </div>
   </template>
 
@@ -64,6 +65,16 @@
         },
         uid: {
           type: String,
+        }
+      },
+
+      ready: function () {
+        if (this.message.kynd == "gif") {
+          this.$.message.innerHTML = ""
+          var gifElement = document.createElement("messenger-giphy")
+          gifElement.url = this.message.body
+
+          this.$.message.appendChild(gifElement)
         }
       },
 

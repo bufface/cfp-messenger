@@ -5,15 +5,23 @@
     :host {
       display: block;
     }
+
+    video {
+      max-width: 100%;
+    }
   </style>
 
   <template>
-    <video></video>
+    <video id="video" loop="true" height="200" src$="{{url}}" autoplay="true"></video>
   </template>
 
   <script>
     Polymer({
-      is: "messenger-giphy"
+      is: "messenger-giphy",
+
+      properties: {
+        url: String
+      }
     })
   </script>
 </dom-module>
